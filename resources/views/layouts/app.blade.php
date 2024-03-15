@@ -37,7 +37,7 @@
                             <a class="nav-link" href="{{ route('docente.index') }}">{{ __('Docentes') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('docente.index') }}">{{ __('Materias') }}</a>
+                            <a class="nav-link" href="{{ route('materia.index') }}">{{ __('Materias') }}</a>
                         </li>
 
                         <li class="nav-item">

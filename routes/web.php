@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DocenteController;
+use App\Http\Controllers\MateriaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,11 @@ Route::get('/docente', function () {
     return view('docente.index');
 });
 
+
 Route::get('docente/create', [DocenteController::class, 'create']);
+
+
+
 
 Route::resource('docente', DocenteController::class)->middleware('auth');
 
@@ -32,4 +37,19 @@ Route::get('/home', [App\Http\Controllers\DocenteController::class, 'index'])->n
 
 Route::group(['middleware'=>'auth'], function(){
     Route::get('/', [DocenteController::class, 'index'])->name('home');
+});
+
+
+
+Route::get('/materia', function () {
+    return view('materia.index');
+});
+Route::get('materia/create', [MateriaController::class, 'create']);
+Route::get('/home', [App\Http\Controllers\MateriaController::class, 'index'])->name('home');
+
+Route::resource('materia', MateriaController::class)->middleware('auth');
+Route::get('/home', [App\Http\Controllers\MateriaController::class, 'index'])->name('home');
+
+Route::group(['middleware'=>'auth'], function(){
+    Route::get('/', [MateriaController::class, 'index'])->name('home');
 });
