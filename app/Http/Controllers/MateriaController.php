@@ -15,7 +15,7 @@ class MateriaController extends Controller
      */
     public function index()
     {
-        $materias = Materia::with('docente')->get(); // Cargamos la relación con los docentes
+        $materias = Materia::with('docente')->get(); 
         return view('materia.index', compact('materias'));
     }
 
@@ -25,7 +25,7 @@ class MateriaController extends Controller
     public function create()
     {
         //
-        $docentes = Docente::all(); // Obtener todos los docentes
+        $docentes = Docente::all();
         return view('materia.create', compact('docentes'));
     }
 
@@ -36,7 +36,7 @@ class MateriaController extends Controller
     {
         $request->validate([
             'materia' => 'required|string|max:100',
-            'id_docente' => 'required|exists:docentes,id', // Asegúrate de que el docente exista en la tabla de docentes
+            'id_docente' => 'required|exists:docentes,id', 
         ], [
             'required' => 'El campo :attribute es requerido',
             'exists' => 'El :attribute seleccionado no es válido',
@@ -65,7 +65,7 @@ class MateriaController extends Controller
     {
         //
         $materia = Materia::findOrFail($id);
-        $docentes = Docente::all(); // Obtener todos los docentes
+        $docentes = Docente::all(); 
         return view('materia.edit', compact('materia', 'docentes'));
 
     }
@@ -77,22 +77,21 @@ class MateriaController extends Controller
     {
         $request->validate([
             'materia' => 'required|string|max:100',
-            'id_docente' => 'required|exists:docentes,id', // Asegúrate de que el docente exista en la tabla de docentes
+            'id_docente' => 'required|exists:docentes,id', 
         ], [
             'required' => 'El campo :attribute es requerido',
             'exists' => 'El :attribute seleccionado no es válido',
         ]);
     
-        // Obtener la materia por su ID
         $materia = Materia::findOrFail($id);
     
-        // Actualizar los datos de la materia
+
         $materia->update([
             'materia' => $request->input('materia'),
             'id_docente' => $request->input('id_docente'),
         ]);
     
-        // Redireccionar con un mensaje de éxito
+
         return redirect('materia')->with('mensaje', 'Materia modificada correctamente');
     }
 
