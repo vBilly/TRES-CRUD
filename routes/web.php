@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\MateriaController;
+use App\Http\Controllers\NotaController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -24,11 +25,7 @@ Route::get('/docente', function () {
     return view('docente.index');
 });
 
-
 Route::get('docente/create', [DocenteController::class, 'create']);
-
-
-
 
 Route::resource('docente', DocenteController::class)->middleware('auth');
 
@@ -53,4 +50,19 @@ Route::get('/home', [App\Http\Controllers\MateriaController::class, 'index'])->n
 
 Route::group(['middleware'=>'auth'], function(){
     Route::get('/', [MateriaController::class, 'index'])->name('home');
+});
+
+
+Route::get('/nota', function () {
+    return view('nota.index');
+});
+Route::get('nota/create', [NotaController::class, 'create']);
+Route::get('/home', [App\Http\Controllers\NotaController::class, 'index'])->name('home');
+
+Route::resource('nota', NotaController::class)->middleware('auth');
+Route::get('/home', [App\Http\Controllers\NotaController::class, 'index'])->name('home');
+
+
+Route::group(['middleware'=>'auth'], function(){
+    Route::get('/', [NotaController::class, 'index'])->name('home');
 });
